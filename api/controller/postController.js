@@ -24,12 +24,11 @@ exports.post_getAll = (req, res, next) => {
 };
 
 exports.post_getPost = (req, res, next) => {
-  Post.findOne({ _id: req.params.postName })
+  Post.findOne({ _id: req.params.postId })
     .exec()
     .then((post) => {
       res.render("post", {
-        postTitle: post.postTitle,
-        postContent: post.postContent,
+        post: post,
       });
     })
     .catch((error) => {
@@ -37,26 +36,20 @@ exports.post_getPost = (req, res, next) => {
     });
 };
 
-// exports.post_addComment = (req, res, next) => {
-//   const data = req.body;
-//   var query = {
-//     _id: req.query.postId,
-//   };
-
-//   var update = { $push: { comments: data } };
-
-//   Post.updateOne(query, update, { new: true })
-//     .then((docs) => {
-//       res.status(201).json({
-//         message: "comment added to post",
-//       });
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err.message,
-//       });
-//     });
-// };
+exports.post_addComment = (req, res, next) => {
+  const data = req.body;
+  var query = {
+    _id: req.params.postId,
+  };
+  var update = { $push: { comments: data } };
+  Post.updateOne(query, update, { new: true })
+    .then((docs) => {
+      res.redirect("/post/" + req.params.postId)
+    })
+    .catch((err) => {
+      res.redirect("/post/" + req.params.postId);
+    });
+};
 
 // exports.post_deletePost = (req, res, next) => {
 //   Post.deleteOne({ _id: req.query.postId })

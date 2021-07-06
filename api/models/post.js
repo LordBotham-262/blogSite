@@ -7,8 +7,16 @@ const postSchema = mongoose.Schema({
   photoId: [{ type: String }],
   comments: [
     {
-      by: { type: String },
-      comment: { type: String },
+      type: new mongoose.Schema(
+        {
+          by: {
+            type: String,
+            required: true,
+          },
+          comment: { type: String },
+        },
+        { timestamps: true }
+      ),
     },
   ],
 });

@@ -10,6 +10,11 @@ router.get("/", PostController.post_getAll);
 //@desc GET Posts from DB
 //@route = GET /api/posts
 //@query = postId
-router.get("/posts/:postName", PostController.post_getPost);
+router.get("/post/:postId", PostController.post_getPost);
+
+//@desc PUT comments in post
+//@route = PUT /api/posts
+//@query = postId
+router.post("/post/:postId", PostController.post_addComment);
 
 module.exports = router;

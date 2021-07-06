@@ -8,11 +8,19 @@ const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
-var posts = [];
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.static("public"));
-
 app.set("view engine", "ejs");
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
 
 const postRoutes = require("./api/routes/post");
 const composeRoutes = require("./api/routes/compose");
