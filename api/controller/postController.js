@@ -10,13 +10,7 @@ const contactContent =
   "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
 exports.post_getAll = (req, res, next) => {
-  postId = req.query.postId;
-
-  if (postId) {
-    queryFilter = { _id: postId };
-  } else queryFilter = {};
-
-  Post.find({ queryFilter })
+  Post.find()
     .exec()
     .then((docs) => {
       res.render("home.ejs", {
@@ -29,25 +23,19 @@ exports.post_getAll = (req, res, next) => {
     });
 };
 
-// exports.post_createPost = (req, res, next) => {
-//   const post = new Post({
-//     _id: new mongoose.Types.ObjectId(),
-//     by: req.body.by,
-//     message: req.body.message,
-//   });
-//   post
-//     .save()
-//     .then((docs) => {
-//       res.status(201).json({
-//         message: docs,
-//       });
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err.message,
-//       });
-//     });
-// };
+exports.post_getPost = (req, res, next) => {
+  Post.findOne({ _id: req.params.postName })
+    .exec()
+    .then((post) => {
+      res.render("post", {
+        postTitle: post.postTitle,
+        postContent: post.postContent,
+      });
+    })
+    .catch((error) => {
+      res.status(400).send(error.message);
+    });
+};
 
 // exports.post_addComment = (req, res, next) => {
 //   const data = req.body;

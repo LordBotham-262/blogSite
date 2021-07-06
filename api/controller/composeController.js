@@ -12,8 +12,8 @@ exports.post_getComposePage = (req, res, next) => {
 exports.post_composePost = (req, res, next) => {
   const post = new Post({
     _id: new mongoose.Types.ObjectId(),
-    title: req.body.postTitle,
-    body: req.body.postText,
+    postTitle: req.body.postTitle,
+    postContent: req.body.postContent,
     //   photoId: [{ type: String }],
   });
   post

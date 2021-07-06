@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  title: { type: String, required: true },
-  body: { type: String, required: true },
+  postTitle: { type: String, required: true },
+  postContent: { type: String, required: true },
   photoId: [{ type: String }],
   comments: [
     {
