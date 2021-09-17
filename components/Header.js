@@ -7,7 +7,6 @@ export default function Header() {
         <Link href='/' passHref>
             <h2>The Highway Man</h2>
         </Link>
-
             </div>
         </header>
     )
