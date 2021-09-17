@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Script from 'next/script'
 import Header from '../components/Header'
 
 function MyApp({ Component, pageProps }) {
