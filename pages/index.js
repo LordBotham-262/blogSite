@@ -5,24 +5,28 @@ import Image from 'next/image'
 import matter from 'gray-matter'
 import Post from '../components/Post'
 import { sortByDate } from '../utils'
+import Footer from '../components/Footer'
+import styles from '../styles/Home.module.css'
 
 export default function Home({ posts }) {
   return (
     <div>
       <Head>
-        <title>The Highway Man</title>
+        <title>The Highway Guy | Home</title>
       </Head>
+      
 
       <div className="posts">
         {posts.map((post, index) => (
           <Post key={index} post={post} />
         ))}
       </div>
+
     </div>
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   // Get files from the posts dir
   const files = fs.readdirSync(path.join('posts'))
 
